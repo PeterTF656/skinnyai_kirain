@@ -15,6 +15,7 @@ import io
 print("PyTorch Version: ",torch.__version__)
 print("Torchvision Version: ",torchvision.__version__)
 
+# Initialize the model for this run
 input_size = 224
 data_transforms = {
     'train': transforms.Compose([
@@ -47,7 +48,7 @@ class SqueeznetClassifier():
         self.data_transformer = data_transformer
         self.class_names = class_names
         #self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        self.model = torch.load(model_path, map_location=torch.device('cpu'))
+        self.model = torch.load(model_path, map_location='cpu')
         #self.model.to(self.device)
         self.model.eval()
 
@@ -59,9 +60,14 @@ class SqueeznetClassifier():
         output = self.model(im_tensor)
         _, pred = torch.max(output, 1)
 
-        # print('predicted: {}'.format(class_names[pred]))
+        print('predicted: {}'.format(self.class_names[pred]))
         return self.class_names[pred]
 
 if __name__ == '__main__' :
     Classifier = SqueeznetClassifier()
     print(Classifier.single_img_pred('akiec.jpg'))
+    #input_size = 224
+    #model = torch.load('checkpoints/squeeze_15ep_fe',map_location='cpu')
+    #print(model)
+    #model_ft, input_size = initialize_model('squeezenet', 7, True, use_pretrained=False)
+    #load

@@ -27,7 +27,7 @@ function predict(img) {
   })
     .then(async (response) => {
       try {
-        const { predict } = await response.json()
+        const predict = await response.json()
         document.getElementById('result-label').innerHTML = predict
       } catch (e){
         alert(e.message)
@@ -35,5 +35,4 @@ function predict(img) {
     })
     .catch(err => alert (err))
 }
-
 input.addEventListener('change', onFileSelect);
