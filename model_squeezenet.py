@@ -42,7 +42,8 @@ class SqueeznetClassifier():
         self,
         model_path = 'checkpoints/squeeze_15ep_fe',
         data_transformer = data_transforms['val'],
-        class_names = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+        #class_names = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+        class_names = ['光化性角化病', '基底细胞癌', '浅色脂溢性角化病', '皮肤纤维瘤', '黑色素瘤', '黑素细胞痣', '血管病变']
     ):
         self.model_path = model_path
         self.data_transformer = data_transformer
