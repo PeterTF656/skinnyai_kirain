@@ -46,14 +46,14 @@ class SqueeznetClassifier():
         self.model_path = model_path
         self.data_transformer = data_transformer
         self.class_names = class_names
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        self.model = torch.load(model_path)
-        self.model.to(self.device)
+        #self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.model = torch.load(model_path, map_location=torch.device('cpu'))
+        #self.model.to(self.device)
         self.model.eval()
 
     def single_img_pred(self, img_path):
         im = Image.open(img_path)
-        im_tensor = data_transforms['val'](im).to(self.device)
+        im_tensor = data_transforms['val'](im)#.to(self.device)
         im_tensor.unsqueeze_(0)
         
         output = self.model(im_tensor)
