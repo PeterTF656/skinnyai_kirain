@@ -20,20 +20,19 @@ function convertToFormData(key, val) {
 }
 
 function predict(img) {
-  document.getElementById('result-label').innerHTML = 'Loading...'
+  document.getElementById('result-label').innerHTML = '正在加载中······'
   fetch(`${HOSTURL}/predict`, {
     method: 'POST',
     body: convertToFormData('img', img)
   })
     .then(async (response) => {
       try {
-        const { predict } = await response.json()
-        document.getElementById('result-label').innerHTML = predict
+        const predict = await response.json()
+        document.getElementById('result-label').innerHTML = (`预测疾病种类为：${predict}`)
       } catch (e){
         alert(e.message)
       }
     })
     .catch(err => alert (err))
 }
-
 input.addEventListener('change', onFileSelect);
